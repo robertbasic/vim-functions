@@ -1,11 +1,27 @@
-vim-python-plugin-skeleton
-==========================
+# vim-functions
 
-This is not an actual VIM plugin, just a skeleton for VIM plugins written in (mostly) Python3.
+A collection of Vim functions I don't want to hold in .vimrc
 
-Usage
-=====
+## CreatePHPClass
 
-Git clone this repo, rename files and folders.
+The `CreatePHPClass` function is a quick way to create a PHP class.
 
-`pythonpluginskeleton`, `python_module`, `PythonModule`, `PythonPluginSkeleton` and similar strings are the "placeholders".
+Call it as `CreatePHPClass Ham/Spam/Can` and it will create a new
+`project_root/src/Ham/Spam/Can.php` file.
+
+The contents of the file will be:
+
+``` php
+<?php
+declare(strict_types=1);
+
+namespace Ham\Spam;
+
+class Can
+{
+    public function __construct()
+    {
+    }
+}
+```
+
