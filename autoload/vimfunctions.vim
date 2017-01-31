@@ -1,64 +1,11 @@
-function! vimfunctions#vimfunctionsCreatePHPClass(name)
+function! vimfunctions#VimFunctionsCreatePHPClass(name)
 python3 << endpython3
 import vim
-import os
-import re
-
-def get_file_path(name):
-    root_path = vim.eval("getbufvar('%', 'rootDir')")
-    current_path = vim.eval("expand('%:p:h')")
-
-    if root_path == '':
-        root_path = current_path
-
-    return "%s/src/%s.php" % (root_path, name)
-
-def can_create_file(file_path):
-    if os.path.exists(file_path) and os.path.isfile(file_path):
-        print("%s already exists" % (file_path))
-        return False
-
-    directory = os.path.dirname(file_path)
-
-    if not os.path.exists(directory) or not os.path.isdir(directory):
-        print("%s is not a directory" % (directory))
-        return False
-
-    return True
-
-
-def write_php_file(file_path, namespace, class_name):
-    lines = [
-        "<?php\n",
-        "declare(strict_types=1);\n\n",
-        "namespace %s;\n\n" % (namespace),
-        "class %s\n{\n" % (class_name),
-        "    public function __construct()\n    {\n    }\n}\n"
-    ]
-
-    fp = open(file_path, 'a')
-    for line in lines:
-        fp.write(line)
-    fp.close()
-
-def create_php_class():
-    name = vim.eval("a:name")
-
-    file_path = get_file_path(name)
-
-    if not can_create_file(file_path):
-        return False
-
-    name_parts = name.split("/")
-    class_name = name_parts.pop()
-    namespace = "\\".join(name_parts)
-
-    write_php_file(file_path, namespace, class_name)
-
-    return file_path
+from vimfunctions import create_php_class
 
 if __name__ == '__main__':
-    file_path = create_php_class()
+    name = vim.eval("a:name")
+    file_path = create_php_class.create_php_class(name)
 
     if file_path:
         vim.command("e %s" % (file_path))
