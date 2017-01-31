@@ -45,7 +45,7 @@ def write_test_file(file_path, namespace, class_name):
         "namespace %s;\n\n" % (namespace),
         "use %s\%s;\n\n" % (namespace.replace('Test', ''), class_name.replace('Test', '')),
         "class %s extends \\PHPUnit_Framework_TestCase\n{\n" % (class_name),
-        "    public function __construct()\n    {\n    }\n}\n"
+        "    public function setup()\n    {\n    }\n}\n"
     ]
 
     fp = open(file_path, 'a')

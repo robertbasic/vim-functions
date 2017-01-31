@@ -25,3 +25,21 @@ class Can
 }
 ```
 
+It will also create the corresponding PHPUnit test file
+`project_root/test/HamTest/Spam/CanTest.php`:
+
+``` php
+<?php
+declare(strict_types=1);
+
+namespace HamTest\Spam;
+
+use Ham\Spam\Can;
+
+class CanTest extends \PHPUnit_Framework_TestCase
+{
+    public function setup()
+    {
+    }
+}
+```
