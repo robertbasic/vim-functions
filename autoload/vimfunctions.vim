@@ -13,6 +13,20 @@ def get_file_path(name):
 
     return "%s/src/%s.php" % (root_path, name)
 
+def can_create_file(file_path):
+    if os.path.exists(file_path) and os.path.isfile(file_path):
+        print("%s already exists" % (file_path))
+        return False
+
+    directory = os.path.dirname(file_path)
+
+    if not os.path.exists(directory) or not os.path.isdir(directory):
+        print("%s is not a directory" % (directory))
+        return False
+
+    return True
+
+
 def write_php_file(file_path, namespace, class_name):
     lines = [
         "<?php\n",
@@ -32,9 +46,8 @@ def create_php_class():
 
     file_path = get_file_path(name)
 
-    if os.path.exists(file_path) and os.path.isfile(file_path):
-        print("%s already exists" % (file_path))
-        return
+    if not can_create_file(file_path):
+        return False
 
     name_parts = name.split("/")
     class_name = name_parts.pop()
@@ -46,7 +59,9 @@ def create_php_class():
 
 if __name__ == '__main__':
     file_path = create_php_class()
-    vim.command("e %s" % (file_path))
+
+    if file_path:
+        vim.command("e %s" % (file_path))
 
 endpython3
 endfunction
