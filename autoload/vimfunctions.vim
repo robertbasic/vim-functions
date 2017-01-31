@@ -6,9 +6,11 @@ from vimfunctions import create_php_class
 if __name__ == '__main__':
     name = vim.eval("a:name")
     file_path = create_php_class.create_php_class(name)
+    test_file_path = create_php_class.create_test_class(name)
 
     if file_path:
         vim.command("e %s" % (file_path))
+        vim.command("vsplit %s" % (test_file_path))
 
 endpython3
 endfunction
