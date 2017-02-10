@@ -9,4 +9,4 @@ let g:vimfunctions_plugin_path = expand('<sfile>:p:h')
 call vimfunctions#SetupPyImports()
 
 " A command to call
-command! -nargs=1 CreatePHPClass call vimfunctions#VimFunctionsCreatePHPClass(<f-args>)
+command! -nargs=1 VFCreatePHPClass call vimfunctions#VimFunctionsCreatePHPClass(<f-args>)
